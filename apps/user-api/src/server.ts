@@ -12,7 +12,7 @@ import { Services, services } from './services';
 import { config } from './config';
 import { Context } from './context';
 import buildSchema from './graphql/schema';
-import { koaMiddleware as loggerMiddleware } from './middleware/logger';
+import { koaMiddleware as loggerMiddleware } from 'common';
 
 export type AppState = Koa.DefaultState;
 

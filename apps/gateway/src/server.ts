@@ -11,7 +11,7 @@ import { name, version } from '../package.json';
 import { config } from './config';
 import { Context } from './context';
 import gateway from './graphql/gateway';
-import { koaMiddleware as loggerMiddleware } from './middleware/logger';
+import { koaMiddleware as loggerMiddleware } from 'common';
 
 export type AppState = Koa.DefaultState;
 
