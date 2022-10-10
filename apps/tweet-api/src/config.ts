@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-import { ZodHelpers } from 'common';
+import { ZodHelpers } from '@ese-erigha/common';
 
 const configSchema = z.object({
   GRAPHQL_PORT: ZodHelpers.number,

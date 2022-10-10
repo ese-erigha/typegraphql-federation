@@ -4,7 +4,7 @@ import { ApolloServer } from 'apollo-server-koa';
 import http from 'http';
 import Koa from 'koa';
 import { logger } from 'logger';
-import { koaMiddleware as loggerMiddleware } from 'common';
+import { koaMiddleware as loggerMiddleware } from '@ese-erigha/common';
 import { AddressInfo } from 'net';
 
 import { router } from './routes';

@@ -1,5 +1,5 @@
 import { GraphQLSchema } from 'graphql';
-import { buildFederatedSchema } from 'common';
+import { buildFederatedSchema } from '@ese-erigha/common';
 
 import { User } from '../models';
 import { resolveUserReference } from './references';

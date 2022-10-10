@@ -13,13 +13,16 @@
     "build": "turbo run build",
     "clean": "turbo run clean",
     "test": "turbo run test",
-    "lint": "turbo run lint"
+    "lint": "turbo run lint",
+    "publish-packages": "turbo run build lint test && changeset version && changeset publish"
   },
   "devDependencies": {
+    "@changesets/cli": "^2.25.0",
     "eslint": "^8.23.1",
     "eslint-config-default": "*",
     "prettier": "^2.7.1",
     "turbo": "latest",
     "typescript": "^4.8.3"
-  }
+  },
+  "dependencies": {}
 }

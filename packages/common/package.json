@@ -1,8 +1,11 @@
 {
-  "name": "common",
-  "version": "0.0.0",
+  "name": "@ese-erigha/common",
+  "version": "1.0.0",
   "license": "UNLICENSED",
-  "private": true,
+  "repository": "https://github.com/ese-erigha/graphql-federation",
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
   "directories": {
     "src": "src",
     "test": "tests"

@@ -17,7 +17,7 @@
     "dev": "ts-node-dev --require dotenv/config src/index.ts --no-notify --respawn --transpileOnly | pino-pretty",
     "lint": "tsc --noEmit && TIMING=1 eslint --ext .ts,.tsx src/",
     "test": "yarn test-unit",
-    "test-unit": "jest"
+    "test-unit": "jest --passWithNoTests"
   },
   "dependencies": {
     "@apollo/federation": "^0.37.1",
@@ -27,7 +27,7 @@
     "apollo-server-errors": "^3.3.1",
     "apollo-server-koa": "^3.10.1",
     "class-validator": "^0.13.2",
-    "common": "*",
+    "@ese-erigha/common": "*",
     "graphql": "^16.6.0",
     "koa": "^2.13.4",
     "koa-pino-logger": "^4.0.0",
