@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-import * as ZodHelpers from './lib/types';
+import { ZodHelpers } from 'common';
 
 const configSchema = z.object({
   GRAPHQL_PORT: ZodHelpers.number,

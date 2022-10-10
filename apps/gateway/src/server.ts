@@ -4,6 +4,7 @@ import { ApolloServer } from 'apollo-server-koa';
 import http from 'http';
 import Koa from 'koa';
 import { logger } from 'logger';
+import { koaMiddleware as loggerMiddleware } from 'common';
 import { AddressInfo } from 'net';
 
 import { router } from './routes';
@@ -11,7 +12,6 @@ import { name, version } from '../package.json';
 import { config } from './config';
 import { Context } from './context';
 import gateway from './graphql/gateway';
-import { koaMiddleware as loggerMiddleware } from 'common';
 
 export type AppState = Koa.DefaultState;
 
