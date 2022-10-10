@@ -10,7 +10,7 @@ export class UserResolver {
     return UserRepository.findById(id);
   }
 
-  @Query(_returns => Array<User>)
+  @Query(_returns => [User])
   async users() {
     return UserRepository.findAll();
   }
