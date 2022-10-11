@@ -1,8 +1,21 @@
-import { BuildSchemaOptions } from 'type-graphql';
+import { TweetRepository } from '../../repositories';
+import { Tweet, User } from '../../models';
 
-import { TweetResolver } from './queries/Tweet';
-import { UserTweetsResolver } from './queries/UserTweets';
-
-const resolvers: BuildSchemaOptions['resolvers'] = [TweetResolver, UserTweetsResolver];
-
-export default resolvers;
+export const resolvers = {
+  Query: {
+    tweets: async () => {
+      return TweetRepository.findAll();
+    },
+    tweet: async (_: unknown, { id }: { id: string }) => {
+      return TweetRepository.findById(id);
+    },
+  },
+  Tweet: {
+    creator: (tweet: Tweet) => ({ __typename: 'User', id: tweet.userId }),
+  },
+  User: {
+    tweets: async (user: User) => {
+      return TweetRepository.findUserTweets(user.id);
+    },
+  },
+};
