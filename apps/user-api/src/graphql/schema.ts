@@ -1,9 +1,11 @@
-import { GraphQLSchema } from 'graphql';
-import { buildSubgraphSchema } from '@apollo/federation';
+import { buildSubgraphSchema } from '@apollo/subgraph';
 
 import { resolvers } from './resolvers';
 import { typeDefs } from './typeDef';
 
-export const buildSchema = (): GraphQLSchema => {
+// eslint-disable-next-line no-console
+console.log(typeDefs);
+
+export const buildSchema = () => {
   return buildSubgraphSchema([{ resolvers, typeDefs }]);
 };

@@ -1,10 +1,11 @@
 import { ApolloServer } from 'apollo-server';
-import { ApolloServerPluginInlineTraceDisabled } from 'apollo-server-core';
 
-import gateway from './graphql/gateway';
+import { gateway } from './graphql/gateway';
+
+// eslint-disable-next-line no-console
+console.log({ gateway });
 
 export const server = new ApolloServer({
   gateway,
   introspection: true,
-  plugins: [ApolloServerPluginInlineTraceDisabled()],
 });
