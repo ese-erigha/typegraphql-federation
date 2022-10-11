@@ -1,13 +1,11 @@
 import { z } from 'zod';
 
-import { ZodHelpers } from '@ese-erigha/common';
-
 const configSchema = z.object({
-  GRAPHQL_PORT: ZodHelpers.number,
+  GRAPHQL_PORT: z.string(),
   LOG_LEVEL: z.string().default('debug'),
   NODE_ENV: z.string(),
-  TWEET_API_PORT: ZodHelpers.number,
-  USER_API_PORT: ZodHelpers.number,
+  TWEET_API_PORT: z.string(),
+  USER_API_PORT: z.string(),
 });
 
 export type Config = z.infer<typeof configSchema>;
