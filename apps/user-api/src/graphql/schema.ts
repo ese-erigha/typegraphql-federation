@@ -1,19 +1,13 @@
 import { GraphQLSchema } from 'graphql';
-import { buildFederatedSchema } from '@ese-erigha/common';
+import { buildSubgraphSchema } from '@apollo/federation';
 
-import { User } from '../models';
-import { resolveUserReference } from './references';
-import resolvers from './resolvers';
+import { resolvers } from './resolvers';
+import { typeDefs } from './typeDef';
 
-export default async function build(): Promise<GraphQLSchema> {
-  const schema = await buildFederatedSchema(
-    {
-      resolvers,
-      orphanedTypes: [User],
-    },
-    {
-      User: { __resolveReference: resolveUserReference },
-    },
-  );
-  return schema;
+export const buildSchema = (): GraphQLSchema => {
+  return buildSubgraphSchema([{ resolvers, typeDefs }]);
+};
+
+export default function build(): GraphQLSchema {
+  return buildSubgraphSchema([{ resolvers, typeDefs }]);
 }

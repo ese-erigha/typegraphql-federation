@@ -1,8 +1,15 @@
 import 'reflect-metadata';
 import { logger } from 'logger';
 
-import { startApolloServer } from './server';
+import { server } from './server';
+import { config } from './config';
 
-startApolloServer().catch(err => {
-  logger.error(err);
-});
+server
+  .listen({ port: config.GRAPHQL_PORT })
+  .then(({ url }: { url: string }) => {
+    logger.info(`User service ready at url: ${url}`);
+    return;
+  })
+  .catch(err => {
+    logger.error(err);
+  });
