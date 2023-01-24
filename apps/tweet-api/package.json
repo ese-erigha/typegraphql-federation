@@ -20,6 +20,7 @@
     "test-unit": "jest --passWithNoTests"
   },
   "dependencies": {
+    "@apollo/federation": "^0.38.1",
     "apollo-server": "^3.10.3",
     "apollo-server-core": "^3.10.1",
     "class-validator": "^0.13.2",
