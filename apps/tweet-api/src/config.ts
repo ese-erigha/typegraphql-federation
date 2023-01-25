@@ -1,7 +1,8 @@
 import { z } from 'zod';
+import { ZodHelpers } from 'common';
 
 const configSchema = z.object({
-  GRAPHQL_PORT: z.string(),
+  GRAPHQL_PORT: ZodHelpers.number,
   LOG_LEVEL: z.string().default('debug'),
   NODE_ENV: z.string(),
 });

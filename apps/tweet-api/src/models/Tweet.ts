@@ -1,7 +1,8 @@
-import { Field, ID, ObjectType } from 'type-graphql';
+import { Directive, Field, ID, ObjectType } from 'type-graphql';
 
 import { User } from './User';
 
+@Directive('@key(fields: "id")')
 @ObjectType()
 export class Tweet {
   userId: string;

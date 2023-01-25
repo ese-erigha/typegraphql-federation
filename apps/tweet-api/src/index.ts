@@ -1,15 +1,16 @@
 import 'reflect-metadata';
+import { startStandaloneServer } from '@apollo/server/standalone';
 import { logger } from 'logger';
 
-import { server } from './server';
+import { buildServer } from './server';
 import { config } from './config';
 
-server
-  .listen({ port: config.GRAPHQL_PORT })
-  .then(({ url }: { url: string }) => {
-    logger.info(`Tweet service ready at url: ${url}`);
-    return;
-  })
-  .catch(err => {
+void (async function start() {
+  try {
+    const server = await buildServer();
+    const { url } = await startStandaloneServer(server, { listen: { port: config.GRAPHQL_PORT } });
+    logger.info(`🚀 User service ready at url: ${url}`);
+  } catch (err) {
     logger.error(err);
-  });
+  }
+})();

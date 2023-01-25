@@ -31,6 +31,7 @@
     "zod": "^3.19.1"
   },
   "devDependencies": {
+    "@types/lodash.merge": "^4.6.7",
     "eslint-config-default": "*",
     "jest-presets": "*",
     "tsconfig": "*",

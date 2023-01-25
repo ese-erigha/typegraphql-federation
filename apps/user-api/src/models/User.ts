@@ -4,7 +4,7 @@ import { ObjectType, Directive, Field } from 'type-graphql';
 @ObjectType()
 export class User {
   @Field()
-  id: number;
+  id: string;
 
   @Field()
   username: string;

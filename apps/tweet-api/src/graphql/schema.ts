@@ -1,9 +1,11 @@
-import { GraphQLSchema } from 'graphql';
-import { buildSubgraphSchema } from '@apollo/federation';
+import { buildFederatedSchema } from 'common';
+import { TweetsResolver, UserTweetsResolver } from './resolvers';
+import { User, Tweet } from '../models';
 
-import { resolvers } from './resolvers';
-import { typeDefs } from './typeDef';
-
-export const buildSchema = (): GraphQLSchema => {
-  return buildSubgraphSchema([{ resolvers, typeDefs }]);
+export const buildSchema = async () => {
+  const schema = await buildFederatedSchema({
+    resolvers: [TweetsResolver, UserTweetsResolver],
+    orphanedTypes: [User, Tweet],
+  });
+  return schema;
 };

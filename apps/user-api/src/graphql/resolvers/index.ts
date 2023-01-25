@@ -11,7 +11,7 @@ export class UsersResolver {
   }
 
   @Query(_returns => User)
-  async user(@Arg('id') id: number): Promise<User | null> {
+  async user(@Arg('id') id: string): Promise<User | null> {
     return UserRepository.findById(id);
   }
 }
