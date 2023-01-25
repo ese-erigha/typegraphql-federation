@@ -1,7 +1,7 @@
-import { buildFederatedSchema } from 'common';
-import { UsersResolver } from './resolvers';
-import { resolveUserReference } from './references/user';
-import { User } from '../models';
+import { buildFederatedSchema } from './buildFederatedSchema';
+import { UsersResolver } from './resolver';
+import { resolveUserReference } from './user-reference';
+import { User } from './user';
 
 export const buildSchema = async () => {
   const schema = await buildFederatedSchema(

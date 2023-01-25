@@ -3,8 +3,11 @@ import { ApolloServerPluginInlineTrace } from '@apollo/server/plugin/inlineTrace
 
 import { buildSchema } from './graphql/schema';
 
-export const server = new ApolloServer({
-  schema: buildSchema(),
-  introspection: true,
-  plugins: [ApolloServerPluginInlineTrace()],
-});
+export const buildServer = async () => {
+  const schema = await buildSchema();
+  return new ApolloServer({
+    schema,
+    introspection: true,
+    plugins: [ApolloServerPluginInlineTrace()],
+  });
+};

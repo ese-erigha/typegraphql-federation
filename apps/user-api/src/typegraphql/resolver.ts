@@ -1,7 +1,7 @@
 import { Resolver, Query, Arg } from 'type-graphql';
 
-import { User } from '../../models';
-import { UserRepository } from '../../repositories';
+import { User } from './user';
+import { UserRepository } from '../repositories';
 
 @Resolver(_of => User)
 export class UsersResolver {
