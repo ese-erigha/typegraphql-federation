@@ -3,6 +3,7 @@ RUN apk update
 WORKDIR /app
 ARG SCOPE
 
+RUN apk add --no-cache libc6-compat
 RUN yarn global add turbo
 COPY . .
 RUN turbo prune --scope=${SCOPE} --docker
@@ -16,7 +17,7 @@ ARG SCOPE
 # Install dependencies first to leverage Docker cache
 COPY --from=builder /app/out/json/ .
 COPY --from=builder /app/out/yarn.lock ./yarn.lock
-COPY --from=builder /app/docker.npmrc .npmrc
+# COPY --from=builder /app/docker.npmrc .npmrc
 RUN yarn install
 
 # Build the project and its dependencies
@@ -35,4 +36,4 @@ RUN adduser --system --uid 1001 server
 USER server
 COPY --from=installer /app .
 
-CMD node apps/${APP_SCOPE}/dist/src/index.js
+CMD node apps/${APP_SCOPE}/dist/index.js

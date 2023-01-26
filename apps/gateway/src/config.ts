@@ -7,6 +7,7 @@ const configSchema = z.object({
   NODE_ENV: z.string(),
   TWEET_API_PORT: ZodHelpers.number,
   USER_API_PORT: ZodHelpers.number,
+  GITHUB_TOKEN: z.string(),
 });
 
 export type Config = z.infer<typeof configSchema>;

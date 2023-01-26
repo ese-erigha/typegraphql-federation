@@ -1,29 +1,55 @@
 version: "3"
 
 services:
-  web:
-    container_name: web
+  gateway:
+    container_name: gateway
+    image: gateway
     build:
       context: .
       dockerfile: .docker/Dockerfile
+      args:
+        - GITHUB_TOKEN=$GITHUB_TOKEN
+        - SCOPE=gateway
+    env_file: ./apps/gateway/.env
     restart: always
+    depends_on:
+      - user-api
+      - tweet-api
     ports:
-      - 3000:3000
-    networks:
-      - app_network
-  api:
-    container_name: api
+      - "3000:3000"
+  user-api:
+    container_name: user-api
+    image: user-api
     build:
       context: .
       dockerfile: .docker/Dockerfile
+      args:
+        - GITHUB_TOKEN=$GITHUB_TOKEN
+        - SCOPE=user-api
+    env_file: ./apps/user-api/.env
     restart: always
     ports:
-      - 3001:3001
-    networks:
-      - app_network
+      - "3001:3001" #{HOST:CONTAINER}
+  tweet-api:
+    container_name: tweet-api
+    image: tweet-api
+    build:
+      context: .
+      dockerfile: .docker/Dockerfile
+      args:
+        - GITHUB_TOKEN=$GITHUB_TOKEN
+        - SCOPE=tweet-api
+    env_file: ./apps/tweet-api/.env
+    restart: always
+    depends_on:
+      - user-api
+    ports:
+      - "3002:3002"
 
 # Define a network, which allows containers to communicate
 # with each other, by using their container name as a hostname
-networks:
-  app_network:
-    external: true
+# networks:
+#   app_network:
+#     external: true
+
+
