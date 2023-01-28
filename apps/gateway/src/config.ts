@@ -8,6 +8,8 @@ const configSchema = z.object({
   TWEET_API_PORT: ZodHelpers.number,
   USER_API_PORT: ZodHelpers.number,
   GITHUB_TOKEN: z.string(),
+  USER_API_URL: z.string(),
+  TWEET_API_URL: z.string(),
 });
 
 export type Config = z.infer<typeof configSchema>;

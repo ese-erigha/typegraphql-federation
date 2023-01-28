@@ -1,6 +1,42 @@
 version: "3"
 
 services:
+  user-api:
+    container_name: user-api
+    image: user-api
+    build:
+      context: .
+      dockerfile: .docker/Dockerfile
+      args:
+        - GITHUB_TOKEN=$GITHUB_TOKEN
+        - SCOPE=user-api
+    env_file: ./apps/user-api/.env
+    restart: always
+    expose:
+      - 3001
+    networks:
+      - backend
+    # ports:
+    #   - "3001:3001" #{HOST:CONTAINER}
+  tweet-api:
+    container_name: tweet-api
+    image: tweet-api
+    build:
+      context: .
+      dockerfile: .docker/Dockerfile
+      args:
+        - GITHUB_TOKEN=$GITHUB_TOKEN
+        - SCOPE=tweet-api
+    env_file: ./apps/tweet-api/.env
+    restart: always
+    depends_on:
+      - user-api
+    # ports:
+    #   - "3002:3002"
+    expose:
+      - 3002
+    networks:
+      - backend
   gateway:
     container_name: gateway
     image: gateway
@@ -15,41 +51,25 @@ services:
     depends_on:
       - user-api
       - tweet-api
+    expose:
+      - 3000 # Expose port on container only
+    networks:
+      - backend
+    # ports:
+    #   - "3000:3000"
+  nginx:
+    container_name: nginx
+    image: nginx
+    build: ./infra/nginx
     ports:
-      - "3000:3000"
-  user-api:
-    container_name: user-api
-    image: user-api
-    build:
-      context: .
-      dockerfile: .docker/Dockerfile
-      args:
-        - GITHUB_TOKEN=$GITHUB_TOKEN
-        - SCOPE=user-api
-    env_file: ./apps/user-api/.env
-    restart: always
-    ports:
-      - "3001:3001" #{HOST:CONTAINER}
-  tweet-api:
-    container_name: tweet-api
-    image: tweet-api
-    build:
-      context: .
-      dockerfile: .docker/Dockerfile
-      args:
-        - GITHUB_TOKEN=$GITHUB_TOKEN
-        - SCOPE=tweet-api
-    env_file: ./apps/tweet-api/.env
+      - "8080:80"
     restart: always
     depends_on:
-      - user-api
-    ports:
-      - "3002:3002"
+      - gateway
 
 # Define a network, which allows containers to communicate
 # with each other, by using their container name as a hostname
-# networks:
-#   app_network:
-#     external: true
+networks:
+  backend:
 
 
